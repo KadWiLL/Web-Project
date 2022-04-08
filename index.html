@@ -1,0 +1,64 @@
+<!doctype html>
+
+<html lang = "en">
+	<head>
+		<title> Player Registration </title>
+		<meta name = "Author" content = "Aaliyah Adebukunola, Justin Mais, Xavier Kirlew, Kadeem Williamson"/>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		
+	</head>
+	
+	<body>
+		<section>
+		<h1>REGISTRATION </h1>
+			<div>
+				<form id = "registration" onsubmit='return false'>
+					<fieldset id="playerDetails" style = "padding:20px;width:450px"> 
+						<legend> Registration </legend>
+						<label for = "username">Username:</label>
+						<input type = "text" id = "username" name = "username" pattern = ".{4,}" title = "Username must be more than three (3) characters in length." required /><br/><br/>
+						<label for = "dob">Date of Birth:</label>
+						<input type = "date" id = "dob" name = "dob" required /><br/><br/>
+						<label for = "email">Email:</label>
+						<input type = "email" id = "email" name = "email" maxlength = "74" pattern = ".+@gmail.com" title = "Email address MUST end with “@gmail.com”" required /><br/><br/>
+						<label for = "age">Age:</label>
+						<input type = "number" id = "age" name = "age" min = "6" title = "Must be six (6) years or older to play." required /><br/><br/>
+						<label for = "gender">Gender:</label>
+						<select name="gender" id="gender">
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+						</select>
+					</fieldset>
+
+					<br/><br/>
+					<button type="submit" id="register" onclick = "Register()">Register</button>
+					<button type="button" id="play" onclick = "PlayGame()" disabled >Play</button>
+					<br><br>
+					<textarea id="showpercentage" cols="100" rows="10" disabled></textarea>
+					<textarea id="showallplayers" cols="100" rows="10" disabled style="display: none"></textarea>
+				</form>
+			</div>
+		</section>
+
+		<section>
+			<div id="game-container" style="display: none">
+				<h3>Play</h3> SHIP SAIL, SHIP SAIL, 'OW MUCH MAN DEH PON BOARD?<br/><br/>
+				<div id="game-content"></div>
+				<form name = 'game' id="gameDetails" onsubmit="return false">
+					<label for = 'guess'>Enter your guess: </label>
+					<input type = 'number' id = 'guess1' name = 'guess'/>
+					<input type='button' id='guessbtn' onclick='CheckGuess()' value='Guess'></input>
+					<input type='button' id='playagainBtn' value='Play Again' disabled></input>
+					<input type='button' id='quit' value='Quit' onclick="QuitGame()"></input>
+				</form>
+				<p id="game-result"></p>
+				<div style="height: 50vh"></div>
+			</div>
+		</section>
+
+		<script src="index.js"></script>
+	</body>
+</html>
