@@ -8,7 +8,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		
+		<link rel="stylesheet" href="styles.css">
 	</head>
 	
 	<body>
@@ -36,9 +36,10 @@
 					<br/><br/>
 					<button type="submit" id="register" onclick = "Register()">Register</button>
 					<button type="button" id="play" onclick = "PlayGame()" disabled >Play</button>
+					<button type="button" id="play" onclick = "findPercentageScore()" disabled >Result</button>
 					<br><br>
 					<textarea id="showpercentage" cols="100" rows="10" disabled></textarea>
-					<textarea id="showallplayers" cols="100" rows="10" disabled style="display: none"></textarea>
+					<textarea id="showallplayers" cols="100" rows="10" disabled></textarea>
 				</form>
 			</div>
 		</section>
@@ -58,6 +59,26 @@
 				<div style="height: 50vh"></div>
 			</div>
 		</section>
+
+		<div id="bar" hidden>
+			<div id="bar-female"  class="bar-c" hidden>
+				<div id="bar-f" class="fbar">
+
+				</div>
+				<div>
+					<h5>Females</h5>
+				</div>
+			</div>
+
+			<div id="bar-male"  class="bar-c" hidden>
+				<div id="bar-n" class="fbar">
+					
+				</div>
+				<div>
+					<h5>males</h5>
+				</div>
+			</div>		
+		</div>
 
 		<script src="index.js"></script>
 	</body>

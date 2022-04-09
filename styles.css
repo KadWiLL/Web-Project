@@ -1,0 +1,19 @@
+#bar {
+    display: flex;
+    border: 3px solid black;
+    height: 200px;
+    width: 100%;
+}
+
+.bar-c{
+    border: 3px solid black;
+    width: 50%;
+}
+
+.fbar{
+    background-image: linear-gradient(to bottom right, red, yellow);
+    height: 194px;
+    transition-duration:  0.2s;
+}
+
+

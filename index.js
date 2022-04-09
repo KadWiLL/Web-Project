@@ -4,6 +4,11 @@ var compBounty = 100;
 var chances = 3;
 var currentPlayer;
 
+
+
+//thread interval
+window.setInterval(showFreq, 5000);
+
 function Register() {
 	var username = document.getElementById("username").value;
 	var email = document.getElementById("email").value;
@@ -58,20 +63,21 @@ function Register() {
 			dob: dob,
 			email: email,
 			age: age2,
-			gender: gender
-		}
-		currentPlayer.wins = 0
-		currentPlayer.losses = 0
-		currentPlayer.gamesPlayed = 0
-		currentPlayer.guesses = {
-			correct: [],
-			wrong: []
+			gender: gender,
+			wins: 0,
+			losses: 0,
+			gamesPlayed: 0,
+			guesses: {
+				correct: [],
+				wrong: []
+			}
 		}
 
 		play1Bounty = 100
 		compBounty = 100
 
 		PlayersData.push(currentPlayer)
+		console.log(PlayersData);
 
 		document.getElementById('register').disabled = true; //register button disabled after it was pressed and all entries validated
 		document.getElementById('playerDetails').disabled = true; //fields disabled after register button was pressed and all entries validated
@@ -134,6 +140,7 @@ function CheckGuess() {
 	}
 
 	document.getElementById('guess1').value = ''; //clearing guess field
+	showAll();
 }
 
 function PlayGame() { //function start
@@ -184,7 +191,86 @@ function QuitGame() {
 	document.getElementById("play").disabled = true
 	document.getElementById("playerDetails").disabled = false
 	findPercentageScore()
+	currentPlayer.gamesPlayed = 100;
 }
 
+function showAll() {
+	const resultsArea = document.getElementById("showpercentage")
+	const totalResponses = currentPlayer.guesses.correct.length + currentPlayer.guesses.wrong.length
+	var showAllPlayer = document.getElementById('showallplayers');
+	
+	//reset the input field
+	showAllPlayer.value = '';
 
+	PlayersData.forEach(player => {
+		const percentageScore = Math.ceil((player.guesses.correct.length / totalResponses) * 100)
+
+		//show all players from playerData
+		
+
+		showAllPlayer.append(
+			`Player: ${player.username},\n` +
+			`Date: ${new Date()},\n\n` +
+			`Games played: ${player.gamesPlayed},\n` +
+			`Games won: ${player.wins},\n` +
+			`Games lost: ${player.losses},\n` +
+			`Percentage score: ${percentageScore}% \n\n`
+		);		
+	});
+}
+
+function showFreq(){
+	var femaleBar = document.getElementById("bar-female");
+	var femaleFBar = document.getElementById("bar-f");
+	femaleBar.hidden = false;
+	
+	var maleBar = document.getElementById("bar-male");
+	var maleFBar = document.getElementById("bar-n");
+	maleBar.hidden = false;
+
+	// gender frequency
+	var female = 0;
+	var male = 0;
+
+	//age frequency
+	var less20 = 0;
+	var b20T39 = 0;
+	var b40T69 = 0;
+	var gre69 = 0;
+
+	//extracting data from each player
+	PlayersData.forEach(player => {
+		if (player.gender === "female"){
+			female = female + 1;
+		} else {
+			if (player.gender === "male"){
+				male = male + 1;
+			}		
+		}
+
+		if (player.age < 20){
+			less20 = less20 + 1;
+		} else {
+			if (player.age >= 20 && player.age < 40){
+				b20T39 = b20T39 + 1;
+			} else {
+				if (player.age >= 40 && player.age <= 69){
+					b40T69 = b40T69 + 1;
+				} else {
+					if (player.age > 69){
+						gre69 = gre69 + 1;
+					}
+				}
+			}
+		}
+	});
+
+	//get the frequency of each value
+	var freqFemale = (female / PlayersData.length) * 100; 
+	var freqMale = (male / PlayersData.length) * 100; 
+
+	//add percentage to bar
+	femaleFBar.style.width = (female === 0) ? "0px" : `${freqFemale}%`;
+	maleFBar.style.width = (male === 0) ? "0px" : `${freqMale}%`;
+}
 
