@@ -1,9 +1,11 @@
+
+
 var PlayersData = [];
 var play1Bounty = 100;
 var compBounty = 100;
 var chances = 3;
 var currentPlayer;
-
+var comCorn = 0;
 
 
 //thread interval
@@ -18,8 +20,10 @@ function Register() {
 
 	//validating username
 	if (username === "") {
-		window.alert("Enter your username.");
+		window.alert('Enter your username.')
+		//Swal.fire('Enter your username.')
 	} else if (username.length < 4) {
+		//Swal.fire('Username must be more than three (3) characters in length.')
 		window.alert("Username must be more than three (3) characters in length.");
 	} else {
 		var usernameResult = true;
@@ -45,8 +49,11 @@ function Register() {
 		window.alert("Enter your age.");
 	} else if (age2 < 6) {
 		window.alert("Must be six (6) years or older to play.");
+		//Swal.fire("Must be six (6) years or older to play.")
 	} else if (age2 != age) {
+		
 		window.alert("Age entered does not correspond with date of birth.");
+		//Swal.fire("Age entered does not correspond with date of birth.")
 		document.getElementById('age').value = age2;
 		var ageResult = true;
 		var dobResult = true;
@@ -88,6 +95,9 @@ function Register() {
 function CheckGuess() {
 	var guess1 = parseFloat(document.getElementById("guess1").value);
 	var gameResult = document.getElementById("game-result")
+	var winningGameAudio = new Audio('sounds/winning.wav')
+	var losingGameAudio = new Audio('sounds/losing.wav')
+	
 
 	var player_total = 0;
 	var computer_total = 0;
@@ -95,7 +105,8 @@ function CheckGuess() {
 		losses = 0,
 		games = 1;
 
-	if (guess1 == comCorn) {
+	if (guess1 === comCorn) {
+		winningGameAudio.play();
 		games++; //games counter
 		wins++; //Games Won Counter
 		play1Bounty += guess1
@@ -117,9 +128,11 @@ function CheckGuess() {
 		compBounty += guess1
 
 		if (guess1 > comCorn) {
+			losingGameAudio.play();
 			gameResult.innerHTML = `<br><br>Your guess is too high!<br>Chances remaining: ${chances}`
 		} else { // guess is less than the computer's corn
 			gameResult.innerHTML = `<br><br>Your guess is too low!<br>Chances remaining: ${chances}`
+			losingGameAudio.play();
 		}
 	}
 
@@ -147,6 +160,8 @@ function PlayGame() { //function start
 	const playagain = document.getElementById('playagainBtn');
 	comCorn = Math.floor(Math.random() * 99) + 1; //generating number of computer's corn kernels
 	chances = 3
+	var startGameAudio = new Audio('sounds/start.wav')
+	startGameAudio.play();
 
 	document.getElementById('guessbtn').disabled = false
 	playagain.disabled = true
@@ -198,35 +213,48 @@ function showAll() {
 	const resultsArea = document.getElementById("showpercentage")
 	const totalResponses = currentPlayer.guesses.correct.length + currentPlayer.guesses.wrong.length
 	var showAllPlayer = document.getElementById('showallplayers');
-	
-	//reset the input field
-	showAllPlayer.value = '';
+	const username = '';
+	const age = 0;
+
 
 	PlayersData.forEach(player => {
 		const percentageScore = Math.ceil((player.guesses.correct.length / totalResponses) * 100)
+		
+		var data = '';
 
 		//show all players from playerData
+		PlayersData.forEach(p => {
+			var db = "" + p.dob;
+
+			data += `Player: ${p.username},\n` +
+					`Date: ${db.substring(0,22)},\n\n` +
+					`Games played: ${p.gamesPlayed},\n` +
+					`Games won: ${p.wins},\n` +
+					`Games lost: ${p.losses},\n` +
+					`Percentage score: ${percentageScore}% \n\n`;
+		});
 		
 
-		showAllPlayer.append(
-			`Player: ${player.username},\n` +
-			`Date: ${new Date()},\n\n` +
-			`Games played: ${player.gamesPlayed},\n` +
-			`Games won: ${player.wins},\n` +
-			`Games lost: ${player.losses},\n` +
-			`Percentage score: ${percentageScore}% \n\n`
-		);		
+		showAllPlayer.value = data;
+			
+				
 	});
 }
 
 function showFreq(){
-	var femaleBar = document.getElementById("bar-female");
-	var femaleFBar = document.getElementById("bar-f");
-	femaleBar.hidden = false;
-	
-	var maleBar = document.getElementById("bar-male");
+	document.getElementById("bar").hidden = false
+	document.getElementById("table").hidden = false
 	var maleFBar = document.getElementById("bar-n");
-	maleBar.hidden = false;
+	var femaleFBar = document.getElementById("bar-f");
+	var l20 = document.getElementById("bar-l20");
+	var l20_39 = document.getElementById("bar-20-39");
+	var l40_69 = document.getElementById("bar-40-69");
+	var g70 = document.getElementById("bar-g70");
+
+	
+
+	
+	
 
 	// gender frequency
 	var female = 0;
@@ -268,9 +296,18 @@ function showFreq(){
 	//get the frequency of each value
 	var freqFemale = (female / PlayersData.length) * 100; 
 	var freqMale = (male / PlayersData.length) * 100; 
+	var freqL20 = (less20 / PlayersData.length) * 100;
+	var freq20_39 = (b20T39 / PlayersData.length) * 100;
+	var freq40_69 = (b40T69 / PlayersData.length) * 100;
+	var freqG70 = (gre69 / PlayersData.length) * 100;
+
 
 	//add percentage to bar
 	femaleFBar.style.width = (female === 0) ? "0px" : `${freqFemale}%`;
 	maleFBar.style.width = (male === 0) ? "0px" : `${freqMale}%`;
+	l20.style.width = (less20 === 0) ? "0px" : `${freqL20}%`;
+	l20_39.style.width = (b20T39 === 0) ? "0px" : `${freq20_39}%`;
+	l40_69.style.width = (b40T69 === 0) ? "0px" : `${freq40_69}%`;
+	g70.style.width = (gre69 === 0) ? "0px" : `${freqG70}%`;
 }
 

@@ -1,9 +1,165 @@
-#bar {
+:root{
+    --blue: #00adef;
+    --dark-blue: #10264b;
+    --dark-blue-2: #1a2b51;
+    --pink: #ea028c;
+    --soft-pink: #e4549c;
+    --text: #252525;
+
+    --roboto: 'Roboto Mono', monospace;
+    --roboto2: 'Roboto', sans-serif;
+    --monsterat: 'Montserrat', sans-serif;
+    --lobster: 'Lobster', cursive;
+    --scalar: 'Secular One', sans-serif;
+    --ubuntu: 'Ubuntu', sans-serif;
+    --mitir:  'Mitr', sans-serif;
+
+    --box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    --crazy: rgb(85, 91, 255) 0px 0px 0px 3px, rgb(31, 193, 27) 0px 0px 0px 6px, rgb(255, 217, 19) 0px 0px 0px 9px, rgb(255, 156, 85) 0px 0px 0px 12px, rgb(255, 85, 85) 0px 0px 0px 15px;
+}
+
+body{
+    
+}
+
+.header{
+    width: 100%;
+    height: 50px;
     display: flex;
-    border: 3px solid black;
-    height: 200px;
+    align-items: center;
+    justify-content: center;
+}
+
+.header nav h5{
+    font-size: 25px;
+    font-family: var(--lobster);
+    font-weight: bold;
+    color: #e4549c;
+}
+
+.hero-content{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    margin-top: 50px;
+}
+
+.player-disc{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.player-disc h5{
+    font-size: 20px;
+    color: var(--soft-pink);
+    font-family: var(--monsterat);
+}
+
+.player-disc-item{
+    box-shadow: var(--box-shadow);
+    width: 90%;
+    font-size: 20px;
+    border-radius: 5px;
+    border: none;
+    color: black;
+    font-family: var(--roboto);
+}
+
+.hero-content-main{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 60%;
+}
+
+#main{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
     width: 100%;
 }
+
+#main h1{
+    font-size: 30px;
+    font-weight: bold;
+    font-family: var(--scalar);
+    color: #00adef;
+}
+
+.form-container{
+    width: 50%;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: var(--box-shadow);
+}
+
+#main-game{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.game-container{
+    margin-top: 30px;
+    width: 80%;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: var(--crazy)
+}
+
+.form-control input{
+    border: 1px solid black;
+    outline-style: none;
+    width: 50%;
+    height: 30px;
+    box-shadow:rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.form-control label{
+    font-family: var(--monsterat);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+form{
+    width: 100%;
+}
+
+.player-info{
+    width: 100%;
+}
+
+
+
+#bar {
+    height: 55%;
+    width: 30%;
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+}
+
+table {
+   width: 100%;
+   height: 500px;
+   padding: 10px;
+   font-family: var(--monsterat);
+   color: var(--dark-blue);
+   font-size: 15px;
+   font-weight: bold;
+}
+
+td{
+   width: 50%;
+ }
 
 .bar-c{
     border: 3px solid black;
@@ -12,8 +168,30 @@
 
 .fbar{
     background-image: linear-gradient(to bottom right, red, yellow);
-    height: 194px;
+    height: 25px;
+    width: 0px;
     transition-duration:  0.2s;
+}
+
+.btn1,.btn2,.btn3{
+    padding: 10px;
+    color: white;
+    font-family: var(--monsterat);
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.btn1{
+    background-color: var(--soft-pink);
+}
+
+.btn2{
+    background-color: var(--blue);
+}
+
+.btn3{
+    background-color: var(--dark-blue);
 }
 
 

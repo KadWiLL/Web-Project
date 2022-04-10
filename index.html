@@ -1,85 +1,155 @@
 <!doctype html>
 
-<html lang = "en">
-	<head>
-		<title> Player Registration </title>
-		<meta name = "Author" content = "Aaliyah Adebukunola, Justin Mais, Xavier Kirlew, Kadeem Williamson"/>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
 
-		<link rel="stylesheet" href="styles.css">
-	</head>
-	
-	<body>
-		<section>
-		<h1>REGISTRATION </h1>
-			<div>
-				<form id = "registration" onsubmit='return false'>
-					<fieldset id="playerDetails" style = "padding:20px;width:450px"> 
-						<legend> Registration </legend>
-						<label for = "username">Username:</label>
-						<input type = "text" id = "username" name = "username" pattern = ".{4,}" title = "Username must be more than three (3) characters in length." required /><br/><br/>
-						<label for = "dob">Date of Birth:</label>
-						<input type = "date" id = "dob" name = "dob" required /><br/><br/>
-						<label for = "email">Email:</label>
-						<input type = "email" id = "email" name = "email" maxlength = "74" pattern = ".+@gmail.com" title = "Email address MUST end with “@gmail.com”" required /><br/><br/>
-						<label for = "age">Age:</label>
-						<input type = "number" id = "age" name = "age" min = "6" title = "Must be six (6) years or older to play." required /><br/><br/>
-						<label for = "gender">Gender:</label>
-						<select name="gender" id="gender">
-							<option value="male">Male</option>
-							<option value="female">Female</option>
-						</select>
-					</fieldset>
+<head>
+	<title> Player Registration </title>
+	<meta name="Author" content="Aaliyah Adebukunola, Justin Mais, Xavier Kirlew, Kadeem Williamson" />
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">   
+	<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Mitr&display=swap" rel="stylesheet">
+	  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Athiti:wght@200&family=Merienda+One&display=swap" rel="stylesheet">
+	<!-- <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+		integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous">
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+		integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
+	</script> -->
+	<link rel="stylesheet" href="styles.css">
+</head>
 
-					<br/><br/>
-					<button type="submit" id="register" onclick = "Register()">Register</button>
-					<button type="button" id="play" onclick = "PlayGame()" disabled >Play</button>
-					<button type="button" id="play" onclick = "findPercentageScore()" disabled >Result</button>
-					<br><br>
-					<textarea id="showpercentage" cols="100" rows="10" disabled></textarea>
-					<textarea id="showallplayers" cols="100" rows="10" disabled></textarea>
-				</form>
-			</div>
-		</section>
+<body>
+	<div class="header">
+		<nav>
+			<h5> SHIP SAIL, SHIP SAIL, 'OW MUCH MAN DEH PON BOARD?</h5>
+		</nav>
+	</div>
 
-		<section>
-			<div id="game-container" style="display: none">
-				<h3>Play</h3> SHIP SAIL, SHIP SAIL, 'OW MUCH MAN DEH PON BOARD?<br/><br/>
-				<div id="game-content"></div>
-				<form name = 'game' id="gameDetails" onsubmit="return false">
-					<label for = 'guess'>Enter your guess: </label>
-					<input type = 'number' id = 'guess1' name = 'guess'/>
-					<input type='button' id='guessbtn' onclick='CheckGuess()' value='Guess'></input>
-					<input type='button' id='playagainBtn' value='Play Again' disabled></input>
-					<input type='button' id='quit' value='Quit' onclick="QuitGame()"></input>
-				</form>
-				<p id="game-result"></p>
-				<div style="height: 50vh"></div>
-			</div>
-		</section>
+	<div class="hero-content">
+		<div class="player-disc">
+			<h5>Current Player</h5>
+			<textarea class="player-disc-item" id="showpercentage" cols="50" rows="10" disabled></textarea>
+			<br>
+			<h5>All Player Scores</h5>
+			<textarea class="player-disc-item mm" id="showallplayers" cols="50" rows="20" disabled></textarea>
+		</div>
+		<div class="hero-content-main">
+			<section id="main">
+				<h1>REGISTRATION </h1>
+				<div class="form-container">
+					<form id="registration" onsubmit='return false'>
+						<div id="playerDetails" class="player-info">
+							<div class="form-control">
+								<label for="username">Username:</label>
+								<input type="text" id="username" name="username" pattern=".{4,}"
+								title="Username must be more than three (3) characters in length." required />
+								<br /><br />
+							</div>
+							<div class="form-control">
+								<label for="dob">Date of Birth:</label>
+								<input type="date" id="dob" name="dob" required /><br /><br />
+							</div>
+							<div class="form-control">
+								<label for="email">Email:</label>
+								<input type="email" id="email" name="email" maxlength="74" pattern=".+@gmail.com"
+								title="Email address MUST end with “@gmail.com”" required /><br /><br />
+							</div>
+							<div class="form-control">
+								<label for="age">Age:</label>
+								<input type="number" id="age" name="age" min="6" title="Must be six (6) years or older to play."
+								required /><br /><br />
+							</div>
+							<div class="form-control">
+								<label for="gender">Gender:</label>
+								<select name="gender" id="gender">
+									<option value="male">Male</option>
+									<option value="female">Female</option>
+								</select>
+							</div>
+						</div>
 
-		<div id="bar" hidden>
-			<div id="bar-female"  class="bar-c" hidden>
-				<div id="bar-f" class="fbar">
-
+						<br /><br />
+						<button type="submit" id="register" class="btn1" onclick="Register()">Register</button>
+						<button type="button" id="play" class="btn2" onclick="PlayGame()" disabled>Play</button>
+						<button type="button" id="play" class="btn3" onclick="findPercentageScore()" disabled>Result</button>
+						<br><br>
+						<!-- <textarea id="showpercentage" cols="50" rows="10" disabled></textarea>
+						<br>
+						<textarea id="showallplayers" cols="50" rows="10" disabled></textarea> -->
+					</form>
 				</div>
-				<div>
-					<h5>Females</h5>
-				</div>
-			</div>
+			</section>
 
-			<div id="bar-male"  class="bar-c" hidden>
-				<div id="bar-n" class="fbar">
-					
+			<section id="main-game">
+				<div id="game-container" class="game-container" style="display: none;">
+					<h3>Play</h3> SHIP SAIL, SHIP SAIL, 'OW MUCH MAN DEH PON BOARD?<br /><br />
+					<div id="game-content"></div>
+					<form name='game' id="gameDetails" onsubmit="return false">
+						<label for='guess'>Enter your guess: </label>
+						<input type='number' id='guess1' name='guess' />
+						<input type='button' id='guessbtn' onclick='CheckGuess()' value='Guess'></input>
+						<input type='button' id='playagainBtn' value='Play Again' disabled></input>
+						<input type='button' id='quit' value='Quit' onclick="QuitGame()"></input>
+					</form>
+					<p id="game-result"></p>
+					<!-- <div style="height: 50vh"></div> -->
 				</div>
-				<div>
-					<h5>males</h5>
-				</div>
-			</div>		
+			</section>
 		</div>
 
-		<script src="index.js"></script>
-	</body>
+		<div id="bar" hidden>
+			<table id="table" hidden>
+				<tr>
+					<th colspan="2"><h1>Frequencies</h1></th>
+				</tr>
+				<tr>
+					<td>Female</td>
+					<td><div id="bar-f" class="fbar"></div></td>
+				</tr>
+				<tr>
+					<td>Male</td>
+					<td><div id="bar-n" class="fbar"></div></td>
+				</tr>
+				<tr>
+					<td>Age < 20</td>
+					<td><div id="bar-l20" class="fbar"></div></td>
+				</tr>
+				<tr>
+					<td>Age 20 - 39</td>
+					<td>
+						<div>
+							<div id="bar-20-39" class="fbar">
+
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>Age 40 - 69</td>
+					<td><div id="bar-40-69" class="fbar"></div></td>
+				</tr>
+				<tr>
+					<td>Age > 70</td>
+					<td><div id="bar-g70" class="fbar"></div></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<script src="index.js"></script>
+</body>
+
 </html>
