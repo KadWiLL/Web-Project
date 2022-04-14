@@ -1,12 +1,9 @@
-
-
 var PlayersData = [];
 var play1Bounty = 100;
 var compBounty = 100;
 var chances = 3;
 var currentPlayer;
 var comCorn = 0;
-
 
 //thread interval
 window.setInterval(showFreq, 5000);
@@ -16,15 +13,14 @@ function Register() {
 	var email = document.getElementById("email").value;
 	var age = document.getElementById("age").value;
 	var dob = new Date(document.getElementById("dob").value);
+	var dobSave = document.getElementById("dob").value;
 	var gender = document.getElementById("gender").value;
 
 	//validating username
 	if (username === "") {
-		window.alert('Enter your username.')
-		//Swal.fire('Enter your username.')
+		Swal.fire('Enter your username.');
 	} else if (username.length < 4) {
-		//Swal.fire('Username must be more than three (3) characters in length.')
-		window.alert("Username must be more than three (3) characters in length.");
+		Swal.fire('Username must be more than three (3) characters in length.')
 	} else {
 		var usernameResult = true;
 	}
@@ -32,9 +28,9 @@ function Register() {
 	//validating email
 	var emailFormat = /^([a-zA-Z0-9.!#$%&'*+=?^_`{|}~-]+@gmail\.com)$/;
 	if (email === "") {
-		window.alert("Enter your email address.");
+		Swal.fire("Enter your email address.");
 	} else if (!email.match(emailFormat)) {
-		window.alert("Email address entered is invalid.");
+		Swal.fire("Email address entered is invalid.");
 	} else {
 		var emailResult = true;
 	}
@@ -46,14 +42,11 @@ function Register() {
 	var age2 = Math.abs(year - 1970); //calculating age of player
 
 	if (age === "") {
-		window.alert("Enter your age.");
+		Swal.fire("Enter your age.");
 	} else if (age2 < 6) {
-		window.alert("Must be six (6) years or older to play.");
-		//Swal.fire("Must be six (6) years or older to play.")
-	} else if (age2 != age) {
-		
-		window.alert("Age entered does not correspond with date of birth.");
-		//Swal.fire("Age entered does not correspond with date of birth.")
+		Swal.fire("Must be six (6) years or older to play.");
+	} else if (age2 != age) {	
+		Swal.fire("Age entered does not correspond with date of birth.");
 		document.getElementById('age').value = age2;
 		var ageResult = true;
 		var dobResult = true;
@@ -67,7 +60,7 @@ function Register() {
 		//PlayersData.push(username + dob + email + age2 + gender);
 		currentPlayer = {
 			username: username,
-			dob: dob,
+			dob: dobSave,
 			email: email,
 			age: age2,
 			gender: gender,
@@ -90,6 +83,8 @@ function Register() {
 		document.getElementById('playerDetails').disabled = true; //fields disabled after register button was pressed and all entries validated
 		document.getElementById('play').disabled = false; //play button enabled after register button was pressed and all entries validated
 	}
+	
+	showCurrentPlayer();
 } //function ends
 
 function CheckGuess() {
@@ -119,24 +114,29 @@ function CheckGuess() {
 		currentPlayer.wins++
 		currentPlayer.gamesPlayed++
 		currentPlayer.guesses.correct.push(guess1)
-	} else if ((guess1 > play1Bounty) || (guess1 < 0)) {
-		window.alert("Ensure your guess is between 1 and " + play1Bounty + " (the amount of kernels you have)");
-	} else if (chances != 0) {
+	} else {
+		losingGameAudio.play();
+	} 
+
+	if (guess1 < 1 || guess1 > 100){
+		Swal.fire("Ensure your guess is between 1 and 100 (the amount of kernels you have)");
+	}
+	
+	if (chances != 0 && guess1 !== comCorn) {
 		chances--;
 		currentPlayer.guesses.wrong.push(guess1)
 		play1Bounty -= guess1
 		compBounty += guess1
 
 		if (guess1 > comCorn) {
-			losingGameAudio.play();
 			gameResult.innerHTML = `<br><br>Your guess is too high!<br>Chances remaining: ${chances}`
 		} else { // guess is less than the computer's corn
-			gameResult.innerHTML = `<br><br>Your guess is too low!<br>Chances remaining: ${chances}`
-			losingGameAudio.play();
+			gameResult.innerHTML = `<br><br>Your guess is too low!<br>Chances remaining: ${chances}`			
 		}
 	}
 
-	if (chances == 0) {
+
+	if (chances == 0 && guess1 !== comCorn) {
 		guess1 = parseFloat(guess1);
 		games++; //games counter
 		losses++; //Games Lost Counter
@@ -156,11 +156,12 @@ function CheckGuess() {
 	showAll();
 }
 
+
 function PlayGame() { //function start
 	const playagain = document.getElementById('playagainBtn');
 	comCorn = Math.floor(Math.random() * 99) + 1; //generating number of computer's corn kernels
-	chances = 3
-	var startGameAudio = new Audio('sounds/start.wav')
+	chances = 3;
+	var startGameAudio = new Audio('sounds/start.wav');
 	startGameAudio.play();
 
 	document.getElementById('guessbtn').disabled = false
@@ -172,7 +173,7 @@ function PlayGame() { //function start
 	})
 
 	document.getElementById("game-content").innerHTML = (
-		`Hi! We have selected a random number between 1 and ${play1Bounty}. You have 3 chances to guess the correct number. You will be advised if your guess was too high or low. Good luck!<br><br>` +
+		`Hi! We have selected a random number between 1 and 100. You have 3 chances to guess the correct number. You will be advised if your guess was too high or low. Good luck!<br><br>` +
 		`<em>Random number = ${comCorn}</em>` // TEST - SHOULD BE REMOVED
 	)
 
@@ -184,7 +185,7 @@ function PlayGame() { //function start
 	});
 } //function end
 
-function findPercentageScore() {
+function showCurrentPlayer(){
 	const resultsArea = document.getElementById("showpercentage")
 	const totalResponses = currentPlayer.guesses.correct.length + currentPlayer.guesses.wrong.length
 	const percentageScore = Math.ceil((currentPlayer.guesses.correct.length / totalResponses) * 100)
@@ -195,8 +196,12 @@ function findPercentageScore() {
 		`Games played: ${currentPlayer.gamesPlayed},\n` +
 		`Games won: ${currentPlayer.wins},\n` +
 		`Games lost: ${currentPlayer.losses},\n` +
-		`Percentage score: ${percentageScore}%`
+		`Percentage score: ${ (percentageScore === null) ? "0" : percentageScore}%`
 	)
+}
+
+function findPercentageScore() {
+	showCurrentPlayer();
 }
 
 function QuitGame() {
@@ -227,7 +232,7 @@ function showAll() {
 			var db = "" + p.dob;
 
 			data += `Player: ${p.username},\n` +
-					`Date: ${db.substring(0,22)},\n\n` +
+					`DOB: ${db.substring(0,22)},\n\n` +
 					`Games played: ${p.gamesPlayed},\n` +
 					`Games won: ${p.wins},\n` +
 					`Games lost: ${p.losses},\n` +
@@ -249,12 +254,7 @@ function showFreq(){
 	var l20 = document.getElementById("bar-l20");
 	var l20_39 = document.getElementById("bar-20-39");
 	var l40_69 = document.getElementById("bar-40-69");
-	var g70 = document.getElementById("bar-g70");
-
-	
-
-	
-	
+	var g70 = document.getElementById("bar-g70");	
 
 	// gender frequency
 	var female = 0;

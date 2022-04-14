@@ -124,6 +124,26 @@ body{
     margin-left: 5px;
 }
 
+.game-content{
+    font-size: 15px;
+    color: var(--dark-blue);
+    font-family: var(--monsterat);
+}
+
+.game-content em{
+    color: var(--soft-pink);
+}
+
+.tt{
+    border: 1px solid black;
+    outline-style: none;
+    width: 50%;
+    height: 30px;
+    box-shadow:rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border-radius: 5px;
+    margin-left: 5px; 
+}
+
 .form-control label{
     font-family: var(--monsterat);
     font-size: 20px;
@@ -180,6 +200,20 @@ td{
     font-weight: bold;
     font-size: 15px;
     cursor: pointer;
+}
+
+.play-text{
+    font-size: 30px;
+    color: var(--soft-pink);
+    font-family: var(--monsterat);
+    font-weight: bold;
+}
+
+.play-text-2{
+    font-size: 20px;
+    color: var(--blue);
+    font-family: var(--monsterat);
+    font-weight: bold;
 }
 
 .btn1{
