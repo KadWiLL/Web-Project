@@ -31,7 +31,7 @@ body{
 }
 
 .header nav h5{
-    font-size: 25px;
+    font-size: 30px;
     font-family: var(--lobster);
     font-weight: bold;
     color: #e4549c;
@@ -103,7 +103,6 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .game-container{
@@ -159,12 +158,16 @@ form{
 }
 
 
-
 #bar {
-    height: 55%;
+    height: 80%;
     width: 30%;
     box-shadow: var(--box-shadow);
     border-radius: 5px;
+}
+
+#freq{
+	font-size: 20px;
+	color: var(--soft-pink);
 }
 
 table {
@@ -179,7 +182,7 @@ table {
 
 td{
    width: 50%;
- }
+}
 
 .bar-c{
     border: 3px solid black;
@@ -202,11 +205,21 @@ td{
     cursor: pointer;
 }
 
+.btn1:hover,.btn2:hover,.btn3:hover{
+    padding: 10px;
+    color: white;
+    font-family: var(--monsterat);
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+}
+
 .play-text{
     font-size: 30px;
     color: var(--soft-pink);
-    font-family: var(--monsterat);
+    font-family: var(--scalar);
     font-weight: bold;
+	text-align: center;
 }
 
 .play-text-2{
@@ -214,6 +227,7 @@ td{
     color: var(--blue);
     font-family: var(--monsterat);
     font-weight: bold;
+	text-align: center;
 }
 
 .btn1{

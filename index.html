@@ -3,8 +3,8 @@
 <html lang="en">
 
 <head>
-	<title> Player Registration </title>
-	<meta name="Author" content="Aaliyah Adebukunola, Justin Mais, Xavier Kirlew, Kadeem Williamson" />
+	<title> SHIP SAIL, SHIP SAIL, 'OW MUCH MAN DEH PON BOARD? </title>
+	<meta name="Author" content="Kadeem Williamson, Aaliyah Adebukunola, Justin Mais, Xavier Kirlew"/>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,30 +73,26 @@
 						<br /><br />
 						<button type="submit" id="register" class="btn1" onclick="Register()">Register</button>
 						<button type="button" id="play" class="btn2" onclick="PlayGame()" disabled>Play</button>
-						<button type="button" id="play" class="btn3" onclick="findPercentageScore()" disabled>Result</button>
+						<button type="button" id="result" class="btn3" onclick="findPercentageScore()" disabled>Result</button>
 						<br><br>
-						<!-- <textarea id="showpercentage" cols="50" rows="10" disabled></textarea>
-						<br>
-						<textarea id="showallplayers" cols="50" rows="10" disabled></textarea> -->
 					</form>
 				</div>
 			</section>
 
 			<section id="main-game">
 				<div id="game-container" class="game-container" style="display: none;">
-					<h3 class="play-text" align="center">Play</h3>
-					<h3 class="play-text-2" align="center"> SHIP SAIL, SHIP SAIL, 'OW MUCH MAN DEH PON BOARD?</h3><br /><br />
+					<h3 class="play-text">PLAY</h3>
+					<h3 class="play-text-2"> SHIP SAIL, SHIP SAIL, 'OW MUCH MAN DEH PON BOARD?</h3><br /><br />
 					<div class="game-content" id="game-content"></div>
 					<form name='game' id="gameDetails" onsubmit="return false">
-						<label class="play-text-2" for='guess'>Enter your guess: </label>
+						<label class="play-text-2" id='guess'>Enter your guess: </label>
 						<input class="tt" type='number' id='guess1' name='guess' />
 						<br><br>
-						<input class="btn1" type='button' id='guessbtn' onclick='CheckGuess()' value='Guess'></input>
-						<input class="btn2" type='button' id='playagainBtn' value='Play Again' disabled></input>
-						<input class="btn3" type='button' id='quit' value='Quit' onclick="QuitGame()"></input>
+						<input class="btn1" type='button' id='guessbtn' onclick='CheckGuess()' value='Guess'/>
+						<input class="btn2" type='button' id='playagainBtn' value='Play Again' disabled />
+						<input class="btn3" type='button' id='quit' value='Quit' onclick="QuitGame()"/>
 					</form>
 					<p id="game-result"></p>
-					<!-- <div style="height: 50vh"></div> -->
 				</div>
 			</section>
 		</div>
@@ -104,7 +100,7 @@
 		<div id="bar" hidden>
 			<table id="table" hidden>
 				<tr>
-					<th colspan="2"><h1>Frequencies</h1></th>
+					<th colspan="2" id="freq">Frequencies</th>
 				</tr>
 				<tr>
 					<td>Female</td>
@@ -115,7 +111,7 @@
 					<td><div id="bar-n" class="fbar"></div></td>
 				</tr>
 				<tr>
-					<td>Age < 20</td>
+					<td>Age &lt; 20 </td>
 					<td><div id="bar-l20" class="fbar"></div></td>
 				</tr>
 				<tr>
@@ -123,7 +119,6 @@
 					<td>
 						<div>
 							<div id="bar-20-39" class="fbar">
-
 							</div>
 						</div>
 					</td>
@@ -133,7 +128,7 @@
 					<td><div id="bar-40-69" class="fbar"></div></td>
 				</tr>
 				<tr>
-					<td>Age > 70</td>
+					<td>Age &gt; 70</td>
 					<td><div id="bar-g70" class="fbar"></div></td>
 				</tr>
 			</table>
